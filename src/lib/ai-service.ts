@@ -1,5 +1,5 @@
 import { BatchResult } from './types';
-import { calculateGrade } from './grading-engine';
+
 import { DEMO_BATCHES } from './demo-data';
 
 export type ValidationStatus = 'VALID' | 'NOT_ONION' | 'POOR_IMAGE' | 'LOW_COUNT';

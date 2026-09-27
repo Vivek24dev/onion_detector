@@ -65,7 +65,7 @@ export default function NewInspectionPage() {
         router.push(`/inspection/result/new?scenario=${demoScenario}&supplier=${encodeURIComponent(supplier)}`)
       }, 1000)
 
-    } catch (error) {
+    } catch {
       setStatus("ERROR")
       setErrorMessage("An unexpected error occurred during validation.")
     }

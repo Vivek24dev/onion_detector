@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, use } from "react"
+import { useEffect, useState, use, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -10,7 +10,7 @@ import { BatchResult, OnionGrade } from "@/lib/types"
 import { useRole } from "@/lib/role-context"
 import { Loader2, Download, Share2, CheckCircle2, AlertTriangle, ShieldCheck, Edit3 } from "lucide-react"
 
-export default function ResultPage(props: { params: Promise<{ id: string }> }) {
+function ResultContent(props: { params: Promise<{ id: string }> }) {
   const { role } = useRole()
   const params = use(props.params);
   const searchParams = useSearchParams()
@@ -274,5 +274,13 @@ function DistributionRow({ label, value, color }: { label: string, value: number
       </div>
       <div className="w-10 text-right font-semibold text-slate-700">{value}%</div>
     </div>
+  )
+}
+
+export default function ResultPage(props: { params: Promise<{ id: string }> }) {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-slate-500">Loading result...</div>}>
+      <ResultContent params={props.params} />
+    </Suspense>
   )
 }
